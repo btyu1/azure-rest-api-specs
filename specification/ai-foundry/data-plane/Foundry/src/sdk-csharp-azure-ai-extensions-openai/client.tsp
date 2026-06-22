@@ -69,8 +69,13 @@ namespace Azure.AI.Projects {
   @@clientName(WorkflowActionOutputItem.kind, "CSDLActionKind");
 
   @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
-  @@alternateType(OpenAI.OutputItemType, {  identity: "OpenAI.Responses.ResponseItemType",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.OutputItemType, {  identity: "OpenAI.Responses.ResponseItemKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   
+  @@alternateType(OpenAI.Tool, {  identity: "OpenAI.Responses.ResponseTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
+  @@alternateType(OpenAI.ToolType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
   // LocalShellToolCallOutputStatus - named union to replace inline union
