@@ -76,6 +76,9 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
   @@alternateType(OpenAI.ToolType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
 
+  //@@alternateType(OpenAI.ToolChoiceParamType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
   // LocalShellToolCallOutputStatus - named union to replace inline union
@@ -511,8 +514,5 @@ namespace Azure.AI.Projects {
     "ResponsesFunctionCallOutputStatus"
   );
   @@clientName(OpenAI.FunctionCallStatus, "ResponsesFunctionCallStatus");
-  @@clientName(
-    OpenAI.ToolSearchExecutionType,
-    "ResponsesToolSearchExecutionType"
-  );
+  //@@alternateType(OpenAI.ToolSearchExecutionType, {  identity: "OpenAI.ToolSearchExecutionType",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
 }
