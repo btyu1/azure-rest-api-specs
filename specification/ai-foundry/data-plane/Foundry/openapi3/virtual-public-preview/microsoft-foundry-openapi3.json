@@ -1509,7 +1509,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -1677,7 +1677,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -1765,7 +1765,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -12851,7 +12851,17 @@
         "operationId": "createConversation",
         "summary": "Create a conversation",
         "description": "Creates a new conversation resource.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -12964,6 +12974,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13043,6 +13062,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13104,6 +13132,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13152,6 +13189,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -13221,6 +13267,15 @@
               }
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13347,6 +13402,15 @@
               "$ref": "#/components/schemas/OpenAI.ItemType"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13435,6 +13499,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13492,6 +13565,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation item to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-identity",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -15022,7 +15104,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -15786,7 +15868,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -15958,7 +16040,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -16032,7 +16114,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -16103,7 +16185,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -16215,7 +16297,7 @@
             "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -19678,6 +19760,11 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "send_credentials_for_agent_card": {
+            "type": "boolean",
+            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
+            "default": false
           }
         },
         "allOf": [
@@ -19711,6 +19798,11 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "send_credentials_for_agent_card": {
+            "type": "boolean",
+            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
+            "default": false
           }
         },
         "allOf": [
@@ -21852,6 +21944,24 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -21978,6 +22088,14 @@
             "enum": [
               "azure_ai_search"
             ]
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "azure_ai_search": {
             "allOf": [
@@ -22520,6 +22638,14 @@
             ],
             "description": "The object type, which is always 'browser_automation'."
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "azure_function": {
             "allOf": [
               {
@@ -22905,6 +23031,24 @@
             ],
             "description": "The object type, which is always 'bing_grounding'."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "bing_grounding": {
             "allOf": [
               {
@@ -23271,6 +23415,24 @@
             ],
             "description": "The type of the tool. Always `capture_structured_outputs`."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "outputs": {
             "allOf": [
               {
@@ -23522,6 +23684,14 @@
               }
             ],
             "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -28763,6 +28933,14 @@
               }
             ]
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "vector_store_ids": {
             "type": "array",
             "items": {
@@ -30078,6 +30256,14 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -32121,6 +32307,24 @@
             ],
             "description": "The type of the code interpreter tool. Always `code_interpreter`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "container": {
             "anyOf": [
@@ -37014,6 +37218,24 @@
                 "type": "null"
               }
             ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -38556,6 +38778,24 @@
                 "type": "null"
               }
             ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -39271,6 +39511,24 @@
               }
             ],
             "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -46621,6 +46879,24 @@
             ],
             "description": "The type of the local shell tool. Always `local_shell`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -46833,6 +47109,14 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -54761,6 +55045,24 @@
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "custom_search_configuration": {
             "allOf": [
               {
@@ -55032,6 +55334,14 @@
             ],
             "description": "The object type, which is always 'openapi'."
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "openapi": {
             "allOf": [
               {
@@ -55151,6 +55461,14 @@
             "enum": [
               "openapi"
             ]
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "openapi": {
             "allOf": [
@@ -59902,6 +60220,14 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "custom_search_configuration": {
             "allOf": [
