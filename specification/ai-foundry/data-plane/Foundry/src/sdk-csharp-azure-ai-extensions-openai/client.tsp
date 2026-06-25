@@ -489,6 +489,14 @@ namespace Azure.AI.Projects {
     }
   );
 
+  @@usage(OpenAI.CustomToolParam, Usage.input | Usage.output);
+  @@access(OpenAI.CustomToolParam, Access.internal);
+
+  @@usage(OpenAI.FunctionShellToolParamEnvironment, Usage.input | Usage.output);
+  @@access(OpenAI.FunctionShellToolParamEnvironment, Access.internal);
+
+  @@usage(OpenApiAuthDetails, Usage.input);
+
   @@usage(OpenAI.OutputItem, Usage.input | Usage.output);
   @@access(OpenAI.OutputItem, Access.public);
   @@alternateType(OpenAI.OutputItem, {  identity: "OpenAI.Responses.ResponseItem",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
