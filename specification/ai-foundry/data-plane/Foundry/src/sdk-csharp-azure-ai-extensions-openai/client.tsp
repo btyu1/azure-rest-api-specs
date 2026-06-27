@@ -26,8 +26,8 @@ namespace Azure.AI.Projects {
   // These operations are temporarily preserved to root request/response models for
   // interim convenience layer support; to be removed once available in
   // https://github.com/openai/openai-dotnet
-  // @@scope(Conversations.createConversation, "!csharp");
-  // @@scope(Conversations.updateConversation, "!csharp");
+  @@scope(Conversations.createConversation, "!csharp");
+  @@scope(Conversations.updateConversation, "!csharp");
 
   @@scope(Conversations.listConversations, "!csharp");
   @@scope(Conversations.getConversation, "!csharp");
@@ -37,9 +37,12 @@ namespace Azure.AI.Projects {
   @@scope(Conversations.getConversationItem, "!csharp");
   @@scope(Conversations.deleteConversationItem, "!csharp");
 
+  // The ConversationResoruce is not yet emitted by the OpenAI SDK, so emitt it here for now. Once the OpenAI SDK emits it, this will be removed.
+  @@clientNamespace(OpenAI.ConversationResource, "Azure.AI.Extensions.OpenAI", "csharp");
   @@usage(OpenAI.ConversationResource, Usage.output);
   @@access(OpenAI.ConversationResource, Access.public);
   @@clientName(OpenAI.ConversationResource, "ProjectConversation");
+
   @@usage(
     OpenAI.CreateConversationBody,
     Usage.output | Usage.json | Usage.input
@@ -48,6 +51,7 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.UpdateConversationBody, Usage.input);
   @@access(OpenAI.UpdateConversationBody, Access.public);
 
+  @@clientNamespace(OpenAI.Metadata, "Azure.AI.Extensions.OpenAI", "csharp");
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
@@ -59,7 +63,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
-  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI.Internal", "csharp");
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
   @@clientName(CreatedBy, "AgentResponseItemSource");
@@ -80,9 +84,56 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
   @@alternateType(OpenAI.ToolType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
 
-  //@@alternateType(OpenAI.ToolChoiceParamType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ComputerTool, {  identity: "OpenAI.Responses.ComputerTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.WebSearchTool, {  identity: "OpenAI.Responses.WebSearchTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.FunctionTool, {  identity: "OpenAI.Responses.FunctionTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.AnnotationType, {  identity: "OpenAI.Responses.ResponseMessageAnnotationKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchCallOutputStatus, {  identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
 
+  // --------------------------------------------------------------------------------
+  // Export OpenAI types from the OpenAI package instead of re-emitting them.
+  // Each target verified public in OpenAI 2.11.0. Input/output TypeSpec twins
+  // (the "...Param" variants) are mapped onto the single OpenAI package type.
+  // --------------------------------------------------------------------------------
 
+  // ApplyPatch tool: status enums (closed enum -> extensible struct in package)
+  @@alternateType(OpenAI.ApplyPatchCallOutputStatusParam, {  identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchCallStatus, {  identity: "OpenAI.Responses.ApplyPatchCallStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchCallStatusParam, {  identity: "OpenAI.Responses.ApplyPatchCallStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // ApplyPatch tool: file operations
+  @@alternateType(OpenAI.ApplyPatchOperationParam, {  identity: "OpenAI.Responses.ApplyPatchOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchCreateFileOperation, {  identity: "OpenAI.Responses.ApplyPatchCreateFileOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchDeleteFileOperation, {  identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchDeleteFileOperationParam, {  identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchUpdateFileOperation, {  identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApplyPatchUpdateFileOperationParam, {  identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Computer tool
+  // @@alternateType(OpenAI.ComputerActionType, {  identity: "OpenAI.Responses.ComputerCallActionKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ComputerCallSafetyCheckParam, {  identity: "OpenAI.Responses.ComputerCallSafetyCheck",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Message item
+  //@@alternateType(OpenAI.MessageRole, {  identity: "OpenAI.Responses.MessageRole",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  //@@alternateType(OpenAI.MessageStatus, {  identity: "OpenAI.Responses.MessageStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Annotations
+  @@alternateType(OpenAI.ContainerFileCitationBody, {  identity: "OpenAI.Responses.ContainerFileCitationMessageAnnotation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Response-level enums / details
+  @@alternateType(OpenAI.ResponseErrorCode, {  identity: "OpenAI.Responses.ResponseErrorCode",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  // NOTE: the TypeSpec model is `union ServiceTier`; the emitter prefixes it to
+  // ResponseServiceTier, so the alternateType source must be OpenAI.ServiceTier.
+  @@alternateType(OpenAI.ServiceTier, {  identity: "OpenAI.Responses.ResponseServiceTier",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  
+  // Token usage
+  @@alternateType(OpenAI.ResponseUsage, {  identity: "OpenAI.Responses.ResponseTokenUsage",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ResponseUsageInputTokensDetails, {  identity: "OpenAI.Responses.ResponseInputTokenUsageDetails",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ResponseUsageOutputTokensDetails, {  identity: "OpenAI.Responses.ResponseOutputTokenUsageDetails",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  @@alternateType(OpenAI.Annotation, {  identity: "OpenAI.Responses.ResponseMessageAnnotation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  @@alternateType(OpenAI.Response, {  identity: "OpenAI.Responses.ResponseResult",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
   // LocalShellToolCallOutputStatus - named union to replace inline union
@@ -504,6 +555,16 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputItem, Usage.input | Usage.output);
   @@access(OpenAI.OutputItem, Access.public);
   @@alternateType(OpenAI.OutputItem, {  identity: "OpenAI.Responses.ResponseItem",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Memory Stores search/update operations are the only Foundry operations that define
+  // OpenAI.InputItem as inputs, which otherwise pulls in the entire OpenAI input-item
+  // hierarchy (InputItem -> InputItemComputerToolCall -> ComputerAction -> ClickParam, etc.).
+  // Map it to the OpenAI .NET library's ResponseItem, consistent with OutputItem above.
+  @@alternateType(OpenAI.InputItem, {  identity: "OpenAI.Responses.ResponseItem",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.InputItemType, {  identity: "OpenAI.Responses.ResponseItemKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  // Just disappear it.
+  @@alternateType(OpenAI.EasyInputMessage, { identity: "System.Object" }, "csharp");
 
   @@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
