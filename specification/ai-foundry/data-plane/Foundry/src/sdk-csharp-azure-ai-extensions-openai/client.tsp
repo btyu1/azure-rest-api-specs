@@ -53,6 +53,7 @@ namespace Azure.AI.Projects {
 
   @@clientNamespace(OpenAI.Metadata, "Azure.AI.Extensions.OpenAI", "csharp");
   @@access(OpenAI.Metadata, Access.internal);
+  @@usage(OpenAI.Metadata, Usage.input | Usage.output);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
   // --------------------------------------------------------------------------------
@@ -62,6 +63,8 @@ namespace Azure.AI.Projects {
 
   // --------------------------------------------------------------------------------
   // Fix the xref.
+  // Set it to default move all of OpenAI to "Internal" to make detecting new models 
+  // simpler.
   // --------------------------------------------------------------------------------
   @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI.Internal", "csharp");
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
@@ -76,14 +79,13 @@ namespace Azure.AI.Projects {
   
   @@clientName(WorkflowActionOutputItem.kind, "CSDLActionKind");
 
+  // Now take the OpenAI models, and ensure that they are emitted as consumption points from the OpenAI SDK instead of re-emitting them here.
+  // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
   @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
   @@alternateType(OpenAI.OutputItemType, {  identity: "OpenAI.Responses.ResponseItemKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
-  
   @@alternateType(OpenAI.Tool, {  identity: "OpenAI.Responses.ResponseTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
-
   @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
   @@alternateType(OpenAI.ToolType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
-
   @@alternateType(OpenAI.ComputerTool, {  identity: "OpenAI.Responses.ComputerTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.WebSearchTool, {  identity: "OpenAI.Responses.WebSearchTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.FunctionTool, {  identity: "OpenAI.Responses.FunctionTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
@@ -134,6 +136,18 @@ namespace Azure.AI.Projects {
   @@alternateType(OpenAI.Annotation, {  identity: "OpenAI.Responses.ResponseMessageAnnotation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
 
   @@alternateType(OpenAI.Response, {  identity: "OpenAI.Responses.ResponseResult",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  
+  // Now for some types, our TypeSpec is ahead of the OpenAI SDK, so we need to emit them here instead of mapping to the OpenAI SDK. These are all types that are not yet in the OpenAI SDK as of 2.11.0.
+  @@clientNamespace(OpenAI.ContainerSkill, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(OpenAI.ContainerSkillType, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(OpenAI.CustomGrammarFormatParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(OpenAI.LocalSkillParam, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(OpenAI.ToolSearchExecutionType, "Azure.AI.Extensions.OpenAI", "csharp");
+
+  // And now drop classes that aren't referenced, and aren't pruned.
+  @@alternateType(OpenAI.InputTextContent, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.InputImageContent, { identity: "System.Object" }, "csharp");
+
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
   // LocalShellToolCallOutputStatus - named union to replace inline union
@@ -248,26 +262,6 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.OutputMessageContent, Access.internal);
   @@clientName(OpenAI.OutputMessageContent, "InternalOutputMessageContent");
-
-  @@access(OpenAI.InputImageContent, Access.internal);
-  @@clientName(OpenAI.InputImageContent, "InternalInputImageContent");
-
-  @@access(OpenAI.InputFileContent, Access.internal);
-  @@clientName(OpenAI.InputFileContent, "InternalInputFileContent");
-
-  @@access(OpenAI.InputFileContentParam, Access.internal);
-  @@clientName(OpenAI.InputFileContentParam, "InternalInputFileContentParam");
-
-  @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
-  @@clientName(
-    OpenAI.InputImageContentParamAutoParam,
-    "InternalInputImageContentParamAutoParam"
-  );
-  @@access(OpenAI.InputTextContent, Access.internal);
-  @@clientName(OpenAI.InputTextContent, "InternalInputTextContent");
-
-  @@access(OpenAI.InputTextContentParam, Access.internal);
-  @@clientName(OpenAI.InputTextContentParam, "InternalInputTextContentParam");
 
   @@access(OpenAI.OutputItemMcpListTools, Access.internal);
   @@clientName(OpenAI.OutputItemMcpListTools, "InternalOutputItemMcpListTools");
@@ -407,36 +401,6 @@ namespace Azure.AI.Projects {
 
   @@clientName(_AgentItemType.a2a_preview_call, "A2APreviewCall ");
   @@clientName(_AgentItemType.a2a_preview_call_output, "A2APreviewCallOutput");
-
-  @@access(OpenAI.WebSearchActionFind, Access.internal);
-  @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
-
-  @@access(OpenAI.WebSearchActionOpenPage, Access.internal);
-  @@clientName(
-    OpenAI.WebSearchActionOpenPage,
-    "InternalWebSearchActionOpenPage"
-  );
-
-  @@access(OpenAI.WebSearchActionSearch, Access.internal);
-  @@clientName(OpenAI.WebSearchActionSearch, "InternalWebSearchActionSearch");
-
-  @@access(OpenAI.CodeInterpreterOutputImage, Access.internal);
-  @@clientName(
-    OpenAI.CodeInterpreterOutputImage,
-    "InternalCodeInterpreterOutputImage"
-  );
-
-  @@access(OpenAI.CodeInterpreterOutputLogs, Access.internal);
-  @@clientName(
-    OpenAI.CodeInterpreterOutputLogs,
-    "InternalCodeInterpreterOutputLogs"
-  );
-
-  @@access(OpenAI.ComparisonFilter, Access.internal);
-  @@clientName(OpenAI.ComparisonFilter, "InternalComparisonFilter");
-
-  @@access(OpenAI.CompoundFilter, Access.internal);
-  @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter");
 
   @@access(OpenAI.ComputerUsePreviewTool, Access.internal);
   @@clientName(OpenAI.ComputerUsePreviewTool, "InternalComputerUsePreviewTool");
