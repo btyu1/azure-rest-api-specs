@@ -808,7 +808,8 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
           ]
         },
         "tags": [
@@ -3008,7 +3009,8 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
           ]
         },
         "tags": [
@@ -3092,6 +3094,39 @@
             "explode": false
           },
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DraftAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "include_drafts",
+            "in": "query",
+            "required": false,
+            "description": "(Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).",
+            "schema": {
+              "type": "boolean",
+              "x-ms-foundry-meta": {
+                "conditional_previews": [
+                  "DraftAgents=V1Preview"
+                ]
+              },
+              "default": false
+            },
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "explode": false
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -3162,7 +3197,12 @@
         },
         "tags": [
           "Agent Versions"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DraftAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}": {
@@ -4842,7 +4882,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -4947,7 +4987,7 @@
           "description": "The job to create."
         },
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -5037,7 +5077,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -5108,7 +5148,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -5188,7 +5228,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -6670,7 +6710,7 @@
           "description": "The evaluation suite version to create."
         },
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -7008,7 +7048,7 @@
           "description": "The run request parameters."
         },
         "x-ms-foundry-meta": {
-          "required_previews": [
+          "conditional_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -20119,7 +20159,12 @@
             "$ref": "#/components/schemas/InsightRequest"
           }
         ],
-        "description": "Insights on set of Agent Evaluation Results"
+        "description": "Insights on set of Agent Evaluation Results",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "AgentClusterInsightResult": {
         "type": "object",
@@ -20144,7 +20189,12 @@
             "$ref": "#/components/schemas/InsightResult"
           }
         ],
-        "description": "Insights from the agent cluster analysis."
+        "description": "Insights from the agent cluster analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "AgentContainerObject": {
         "type": "object",
@@ -20381,7 +20431,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
+        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "AgentDefinition": {
         "type": "object",
@@ -20414,7 +20469,8 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
           ]
         }
       },
@@ -20423,6 +20479,7 @@
         "enum": [
           "WorkflowAgents=V1Preview",
           "ExternalAgents=V1Preview",
+          "DraftAgents=V1Preview",
           "HostedAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
@@ -20751,7 +20808,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from."
+        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "AgentEvaluatorGenerationJobSource": {
         "type": "object",
@@ -20785,7 +20847,12 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from."
+        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "AgentFilterTraceSource": {
         "type": "object",
@@ -21143,7 +21210,12 @@
             "$ref": "#/components/schemas/EvaluationTaxonomyInput"
           }
         ],
-        "description": "Input configuration for the evaluation taxonomy when the input type is agent."
+        "description": "Input configuration for the evaluation taxonomy when the input type is agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "AgentTaxonomyInputUpdate": {
         "type": "object",
@@ -21176,7 +21248,12 @@
             "$ref": "#/components/schemas/EvaluationTaxonomyInputUpdate"
           }
         ],
-        "description": "Input configuration for the evaluation taxonomy when the input type is agent."
+        "description": "Input configuration for the evaluation taxonomy when the input type is agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "AgentVersionObject": {
         "type": "object",
@@ -21240,6 +21317,16 @@
           },
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
           },
           "status": {
             "allOf": [
@@ -21385,7 +21472,12 @@
             "description": "Signals detected in the model artifact"
           }
         },
-        "description": "Artifact profile of the model"
+        "description": "Artifact profile of the model",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "AssetCredentialResponse": {
         "type": "object",
@@ -21473,7 +21565,12 @@
             ]
           }
         ],
-        "description": "Strategies for attacks."
+        "description": "Strategies for attacks.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "Azure.Core.Foundations.Error": {
         "type": "object",
@@ -22088,14 +22185,6 @@
             "enum": [
               "azure_ai_search"
             ]
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
           },
           "azure_ai_search": {
             "allOf": [
@@ -22776,7 +22865,12 @@
             "$ref": "#/components/schemas/RedTeamTargetConfig"
           }
         ],
-        "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model."
+        "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "BaseCredentials": {
         "type": "object",
@@ -23473,7 +23567,12 @@
             "description": "Size of the chart element."
           }
         },
-        "description": "Coordinates for the analysis chart."
+        "description": "Coordinates for the analysis chart.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "ChatSummaryMemoryItem": {
         "type": "object",
@@ -23531,7 +23630,12 @@
             "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  ```\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n  ```\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results."
           }
         },
-        "description": "Insights from the cluster analysis."
+        "description": "Insights from the cluster analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "ClusterTokenUsage": {
         "type": "object",
@@ -23557,7 +23661,12 @@
             "description": "total token usage"
           }
         },
-        "description": "Token usage for cluster analysis"
+        "description": "Token usage for cluster analysis",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "CodeBasedEvaluatorDefinition": {
         "type": "object",
@@ -23609,7 +23718,12 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Code-based evaluator definition using python code"
+        "description": "Code-based evaluator definition using python code",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "CodeConfiguration": {
         "type": "object",
@@ -23684,14 +23798,6 @@
               }
             ],
             "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
           }
         },
         "allOf": [
@@ -24271,7 +24377,8 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "DraftAgents=V1Preview"
               ]
             }
           },
@@ -24282,6 +24389,16 @@
               }
             ],
             "description": "The blueprint reference for the agent."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
           },
           "agent_endpoint": {
             "allOf": [
@@ -24303,7 +24420,8 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
           ]
         }
       },
@@ -24438,7 +24556,8 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "DraftAgents=V1Preview"
               ]
             }
           },
@@ -24449,12 +24568,23 @@
               }
             ],
             "description": "The blueprint reference for the agent."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
+            "default": false
           }
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
           ]
         }
       },
@@ -24693,7 +24823,12 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Cron based trigger."
+        "description": "Cron based trigger.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "CustomCredential": {
         "type": "object",
@@ -24791,7 +24926,12 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Daily recurrence schedule."
+        "description": "Daily recurrence schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "DataGenerationJob": {
         "type": "object",
@@ -24860,7 +25000,12 @@
             "readOnly": true
           }
         },
-        "description": "Data Generation Job resource."
+        "description": "Data Generation Job resource.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobInputs": {
         "type": "object",
@@ -24907,7 +25052,12 @@
             "description": "Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both."
           }
         },
-        "description": "Caller-supplied inputs for a data generation job."
+        "description": "Caller-supplied inputs for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOptions": {
         "type": "object",
@@ -24953,7 +25103,12 @@
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
-        "description": "Options for managing data generation jobs."
+        "description": "Options for managing data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutput": {
         "type": "object",
@@ -24977,7 +25132,12 @@
             "dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
           }
         },
-        "description": "Output information for a data generation job."
+        "description": "Output information for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutputOptions": {
         "type": "object",
@@ -24998,7 +25158,12 @@
             "description": "Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs."
           }
         },
-        "description": "Output options for data generation job."
+        "description": "Output options for data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutputType": {
         "anyOf": [
@@ -25013,7 +25178,12 @@
             ]
           }
         ],
-        "description": "The supported output file types for a data generation job."
+        "description": "The supported output file types for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobResult": {
         "type": "object",
@@ -25042,7 +25212,12 @@
             "description": "The token usage information for the data generation job."
           }
         },
-        "description": "Result produced by a successful data generation job."
+        "description": "Result produced by a successful data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobScenario": {
         "anyOf": [
@@ -25058,7 +25233,12 @@
             ]
           }
         ],
-        "description": "The supported scenarios for a data generation job."
+        "description": "The supported scenarios for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobSource": {
         "type": "object",
@@ -25088,7 +25268,12 @@
             "file": "#/components/schemas/FileDataGenerationJobSource"
           }
         },
-        "description": "The base source model for data generation jobs."
+        "description": "The base source model for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobSourceType": {
         "anyOf": [
@@ -25105,7 +25290,12 @@
             ]
           }
         ],
-        "description": "The supported source types for data generation jobs."
+        "description": "The supported source types for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -25121,7 +25311,12 @@
             ]
           }
         ],
-        "description": "The supported data generation job types."
+        "description": "The supported data generation job types.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationModelOptions": {
         "type": "object",
@@ -25134,7 +25329,12 @@
             "description": "Base model name used to generate data."
           }
         },
-        "description": "LLM model options for data generation jobs."
+        "description": "LLM model options for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationTokenUsage": {
         "type": "object",
@@ -25163,7 +25363,12 @@
             "readOnly": true
           }
         },
-        "description": "Token usage information for a data generation job."
+        "description": "Token usage information for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataSourceConfig": {
         "type": "object",
@@ -25237,7 +25442,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
         ],
-        "description": "Dataset output for a data generation job."
+        "description": "Dataset output for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DatasetEvaluationSuiteJobSource": {
         "type": "object",
@@ -25271,7 +25481,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset."
+        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
@@ -25305,7 +25520,12 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Dataset source for evaluator generation jobs — reference to a dataset."
+        "description": "Dataset source for evaluator generation jobs — reference to a dataset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DatasetReference": {
         "type": "object",
@@ -25323,7 +25543,12 @@
             "description": "Dataset version."
           }
         },
-        "description": "Reference to a versioned Foundry Dataset."
+        "description": "Reference to a versioned Foundry Dataset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DatasetType": {
         "anyOf": [
@@ -25450,7 +25675,12 @@
             ]
           }
         ],
-        "description": "Days of the week for recurrence schedule."
+        "description": "Days of the week for recurrence schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "DeleteAgentResponse": {
         "type": "object",
@@ -25671,7 +25901,12 @@
             "description": "Whether the skill was successfully deleted."
           }
         },
-        "description": "A deleted skill."
+        "description": "A deleted skill.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Skills=V1Preview"
+          ]
+        }
       },
       "DeleteSkillVersionResponse": {
         "type": "object",
@@ -25703,7 +25938,12 @@
             "description": "The version that was deleted."
           }
         },
-        "description": "A deleted skill version."
+        "description": "A deleted skill version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Skills=V1Preview"
+          ]
+        }
       },
       "Deployment": {
         "type": "object",
@@ -25802,7 +26042,12 @@
             "default": false
           }
         },
-        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
+        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -25845,6 +26090,32 @@
             "Routines=V1Preview"
           ]
         }
+      },
+      "EndpointBasedEvaluatorDefinition": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "endpoint"
+            ]
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinition"
+          }
+        ],
+        "description": "Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row."
       },
       "EntraAuthorizationScheme": {
         "type": "object",
@@ -26083,7 +26354,12 @@
             "description": "indicates if the check passed or failed"
           }
         },
-        "description": "Result of the evaluation."
+        "description": "Result of the evaluation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvalRun": {
         "type": "object",
@@ -26520,7 +26796,12 @@
             "description": "Type of treatment effect."
           }
         },
-        "description": "Metric comparison for a treatment against the baseline."
+        "description": "Metric comparison for a treatment against the baseline.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvalRunResultComparison": {
         "type": "object",
@@ -26560,7 +26841,12 @@
             "description": "List of comparison results for each treatment run."
           }
         },
-        "description": "Comparison results for treatment runs against the baseline."
+        "description": "Comparison results for treatment runs against the baseline.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvalRunResultSummary": {
         "type": "object",
@@ -26591,7 +26877,12 @@
             "description": "Standard deviation of the metric in the evaluation run."
           }
         },
-        "description": "Summary statistics of a metric in an evaluation run."
+        "description": "Summary statistics of a metric in an evaluation run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "Evaluation": {
         "type": "object",
@@ -26696,7 +26987,12 @@
             "$ref": "#/components/schemas/InsightRequest"
           }
         ],
-        "description": "Evaluation Comparison Request"
+        "description": "Evaluation Comparison Request",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvaluationComparisonInsightResult": {
         "type": "object",
@@ -26730,7 +27026,12 @@
             "$ref": "#/components/schemas/InsightResult"
           }
         ],
-        "description": "Insights from the evaluation comparison."
+        "description": "Insights from the evaluation comparison.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvaluationDataGenerationType": {
         "anyOf": [
@@ -26747,7 +27048,12 @@
             ]
           }
         ],
-        "description": "The data generation type."
+        "description": "The data generation type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationDatasetReference": {
         "type": "object",
@@ -26768,7 +27074,12 @@
             "description": "Name of the schema file within the dataset's blob folder (e.g., \"a3f2b1c4_schema.json\").\nOptional — if not provided, schema is inferred at runtime from the data.\nOnly applicable for uri_folder datasets."
           }
         },
-        "description": "Reference to a dataset by name and version."
+        "description": "Reference to a dataset by name and version.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationLevel": {
         "anyOf": [
@@ -26813,7 +27124,12 @@
             "$ref": "#/components/schemas/InsightSample"
           }
         ],
-        "description": "A sample from the evaluation result."
+        "description": "A sample from the evaluation result.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvaluationRule": {
         "type": "object",
@@ -26991,7 +27307,12 @@
             "$ref": "#/components/schemas/InsightRequest"
           }
         ],
-        "description": "Insights on set of Evaluation Results"
+        "description": "Insights on set of Evaluation Results",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvaluationRunClusterInsightResult": {
         "type": "object",
@@ -27016,7 +27337,12 @@
             "$ref": "#/components/schemas/InsightResult"
           }
         ],
-        "description": "Insights from the evaluation run cluster analysis."
+        "description": "Insights from the evaluation run cluster analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "EvaluationScheduleTask": {
         "type": "object",
@@ -27047,7 +27373,12 @@
             "$ref": "#/components/schemas/ScheduleTask"
           }
         ],
-        "description": "Evaluation task for the schedule."
+        "description": "Evaluation task for the schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteDataGenerationOptions": {
         "type": "object",
@@ -27068,7 +27399,12 @@
             "description": "Maximum number of samples to generate. Valid range: 15-1000."
           }
         },
-        "description": "Options for dataset generation within an evaluation suite generation job."
+        "description": "Options for dataset generation within an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationCategory": {
         "anyOf": [
@@ -27083,7 +27419,12 @@
             ]
           }
         ],
-        "description": "The category of evaluator generation."
+        "description": "The category of evaluator generation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJob": {
         "type": "object",
@@ -27161,7 +27502,12 @@
             "readOnly": true
           }
         },
-        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJobCreate": {
         "type": "object",
@@ -27175,7 +27521,12 @@
             "description": "Caller-supplied inputs."
           }
         },
-        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJobInputs": {
         "type": "object",
@@ -27250,7 +27601,12 @@
             "description": "Evaluation level for the generated suite.\nDefault: turn (single-turn evaluation).\nUse conversation for multi-turn evaluation."
           }
         },
-        "description": "Caller-supplied inputs for an evaluation suite generation job."
+        "description": "Caller-supplied inputs for an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationTokenUsage": {
         "type": "object",
@@ -27271,7 +27627,12 @@
             "description": "Total tokens consumed."
           }
         },
-        "description": "Token usage summary for an evaluation suite generation job."
+        "description": "Token usage summary for an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteJobSource": {
         "type": "object",
@@ -27301,7 +27662,12 @@
             "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
           }
         },
-        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`."
+        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteJobSourceType": {
         "anyOf": [
@@ -27318,7 +27684,12 @@
             ]
           }
         ],
-        "description": "The supported source types for evaluation suite generation jobs."
+        "description": "The supported source types for evaluation suite generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunRequest": {
         "type": "object",
@@ -27340,7 +27711,12 @@
             "description": "Overrides the suite's default evaluation level. If omitted, uses the level from the suite."
           }
         },
-        "description": "Request body for running an evaluation from a suite."
+        "description": "Request body for running an evaluation from a suite.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunResponse": {
         "type": "object",
@@ -27366,7 +27742,12 @@
             "description": "The run results. Currently a single-element array; will support multiple runs in the future."
           }
         },
-        "description": "Response from running an evaluation suite."
+        "description": "Response from running an evaluation suite.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunResult": {
         "type": "object",
@@ -27402,7 +27783,12 @@
             "description": "Timestamp when the run was created."
           }
         },
-        "description": "Result of a single evaluation run within a suite execution."
+        "description": "Result of a single evaluation run within a suite execution.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteSubtype": {
         "anyOf": [
@@ -27417,7 +27803,12 @@
             ]
           }
         ],
-        "description": "The subtype of an evaluation suite."
+        "description": "The subtype of an evaluation suite.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersion": {
         "type": "object",
@@ -27512,7 +27903,12 @@
             "readOnly": true
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersionCreate": {
         "type": "object",
@@ -27606,7 +28002,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersionUpdate": {
         "type": "object",
@@ -27700,7 +28101,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTarget": {
         "type": "object",
@@ -27785,7 +28191,12 @@
             "description": "Additional properties for the evaluation taxonomy."
           }
         },
-        "description": "Evaluation Taxonomy Definition"
+        "description": "Evaluation Taxonomy Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTaxonomyCreateOrUpdate": {
         "type": "object",
@@ -27827,7 +28238,12 @@
             "description": "Additional properties for the evaluation taxonomy."
           }
         },
-        "description": "Evaluation Taxonomy Definition"
+        "description": "Evaluation Taxonomy Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTaxonomyInput": {
         "type": "object",
@@ -27850,7 +28266,12 @@
             "agent": "#/components/schemas/AgentTaxonomyInput"
           }
         },
-        "description": "Input configuration for the evaluation taxonomy."
+        "description": "Input configuration for the evaluation taxonomy.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTaxonomyInputType": {
         "anyOf": [
@@ -27865,7 +28286,12 @@
             ]
           }
         ],
-        "description": "Type of the evaluation taxonomy input."
+        "description": "Type of the evaluation taxonomy input.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTaxonomyInputUpdate": {
         "type": "object",
@@ -27888,7 +28314,12 @@
             "agent": "#/components/schemas/AgentTaxonomyInputUpdate"
           }
         },
-        "description": "Input configuration for the evaluation taxonomy."
+        "description": "Input configuration for the evaluation taxonomy.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTaxonomyUpdate": {
         "type": "object",
@@ -27927,7 +28358,12 @@
             "description": "Additional properties for the evaluation taxonomy."
           }
         },
-        "description": "Evaluation Taxonomy Definition"
+        "description": "Evaluation Taxonomy Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorCategory": {
         "anyOf": [
@@ -27943,7 +28379,12 @@
             ]
           }
         ],
-        "description": "The category of the evaluator"
+        "description": "The category of the evaluator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorConfiguration": {
         "type": "object",
@@ -28026,10 +28467,16 @@
           "mapping": {
             "code": "#/components/schemas/CodeBasedEvaluatorDefinition",
             "prompt": "#/components/schemas/PromptBasedEvaluatorDefinition",
-            "rubric": "#/components/schemas/RubricBasedEvaluatorDefinition"
+            "rubric": "#/components/schemas/RubricBasedEvaluatorDefinition",
+            "endpoint": "#/components/schemas/EndpointBasedEvaluatorDefinition"
           }
         },
-        "description": "Base evaluator configuration with discriminator"
+        "description": "Base evaluator configuration with discriminator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDefinitionType": {
         "anyOf": [
@@ -28044,11 +28491,17 @@
               "prompt_and_code",
               "service",
               "openai_graders",
-              "rubric"
+              "rubric",
+              "endpoint"
             ]
           }
         ],
-        "description": "The type of evaluator definition"
+        "description": "The type of evaluator definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
@@ -28073,7 +28526,12 @@
             "description": "The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation)."
           }
         },
-        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationInputs": {
         "type": "object",
@@ -28110,7 +28568,12 @@
             "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
           }
         },
-        "description": "Caller-supplied inputs for an evaluator generation job."
+        "description": "Caller-supplied inputs for an evaluator generation job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationJob": {
         "type": "object",
@@ -28188,7 +28651,12 @@
             "readOnly": true
           }
         },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationJobCreate": {
         "type": "object",
@@ -28202,7 +28670,12 @@
             "description": "Caller-supplied inputs."
           }
         },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationJobSource": {
         "type": "object",
@@ -28228,7 +28701,12 @@
             "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource"
           }
         },
-        "description": "The base source model for evaluator generation jobs. Polymorphic over `type`."
+        "description": "The base source model for evaluator generation jobs. Polymorphic over `type`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationJobSourceType": {
         "anyOf": [
@@ -28245,7 +28723,12 @@
             ]
           }
         ],
-        "description": "The supported source types for evaluator generation jobs."
+        "description": "The supported source types for evaluator generation jobs.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationTokenUsage": {
         "type": "object",
@@ -28271,7 +28754,12 @@
             "description": "Total tokens consumed (input + output)."
           }
         },
-        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state."
+        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -28312,7 +28800,12 @@
             "description": "Indicates if this metric is primary when there are multiple metrics."
           }
         },
-        "description": "Evaluator Metric"
+        "description": "Evaluator Metric",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorMetricDirection": {
         "anyOf": [
@@ -28328,7 +28821,12 @@
             ]
           }
         ],
-        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral"
+        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorMetricType": {
         "anyOf": [
@@ -28344,7 +28842,12 @@
             ]
           }
         ],
-        "description": "The type of the evaluator"
+        "description": "The type of the evaluator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorType": {
         "anyOf": [
@@ -28359,7 +28862,12 @@
             ]
           }
         ],
-        "description": "The type of the evaluator"
+        "description": "The type of the evaluator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorVersion": {
         "type": "object",
@@ -28458,7 +28966,12 @@
             "readOnly": true
           }
         },
-        "description": "Evaluator Definition"
+        "description": "Evaluator Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorVersionCreate": {
         "type": "object",
@@ -28524,7 +29037,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Evaluator Definition"
+        "description": "Evaluator Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorVersionUpdate": {
         "type": "object",
@@ -28569,7 +29087,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Evaluator Definition"
+        "description": "Evaluator Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "ExternalAgentDefinition": {
         "type": "object",
@@ -28825,7 +29348,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
         ],
-        "description": "Azure OpenAI file output for a data generation job."
+        "description": "Azure OpenAI file output for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "FileDataGenerationJobSource": {
         "type": "object",
@@ -28851,7 +29379,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "File source for data generation jobs — Azure OpenAI file input."
+        "description": "File source for data generation jobs — Azure OpenAI file input.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -28932,14 +29465,6 @@
                 "type": "null"
               }
             ]
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
           },
           "vector_store_ids": {
             "type": "array",
@@ -29054,7 +29579,12 @@
             ]
           }
         ],
-        "description": "The artifact profile category."
+        "description": "The artifact profile category.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryModelArtifactProfileSignal": {
         "anyOf": [
@@ -29072,7 +29602,12 @@
             ]
           }
         ],
-        "description": "Signals detected in the model artifact."
+        "description": "Signals detected in the model artifact.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryModelSourceType": {
         "anyOf": [
@@ -29087,7 +29622,12 @@
             ]
           }
         ],
-        "description": "The source type of the model."
+        "description": "The source type of the model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryModelWarning": {
         "type": "object",
@@ -29105,7 +29645,12 @@
             "description": "The warning message."
           }
         },
-        "description": "A warning associated with a model."
+        "description": "A warning associated with a model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryModelWarningCode": {
         "anyOf": [
@@ -29120,7 +29665,12 @@
             ]
           }
         ],
-        "description": "Warning code for model artifacts."
+        "description": "Warning code for model artifacts.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryModelWeightType": {
         "anyOf": [
@@ -29136,7 +29686,12 @@
             ]
           }
         ],
-        "description": "The weight type of the model."
+        "description": "The weight type of the model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "FoundryTimestamp": {
         "type": "integer",
@@ -29292,13 +29847,6 @@
               "hosted"
             ]
           },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Tool"
-            },
-            "description": "An array of tools the hosted agent's model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter."
-          },
           "cpu": {
             "type": "string",
             "description": "The CPU configuration for the hosted agent.",
@@ -29395,7 +29943,12 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Hourly recurrence schedule."
+        "description": "Hourly recurrence schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "HumanEvaluationPreviewRuleAction": {
         "type": "object",
@@ -29647,7 +30200,12 @@
             "readOnly": true
           }
         },
-        "description": "The response body for cluster insights."
+        "description": "The response body for cluster insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightCluster": {
         "type": "object",
@@ -29700,7 +30258,12 @@
             "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters."
           }
         },
-        "description": "A cluster of analysis samples."
+        "description": "A cluster of analysis samples.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightModelConfiguration": {
         "type": "object",
@@ -29713,7 +30276,12 @@
             "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
           }
         },
-        "description": "Configuration of the model used in the insight generation."
+        "description": "Configuration of the model used in the insight generation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightRequest": {
         "type": "object",
@@ -29738,7 +30306,12 @@
             "EvaluationComparison": "#/components/schemas/EvaluationComparisonInsightRequest"
           }
         },
-        "description": "The request of the insights report."
+        "description": "The request of the insights report.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightResult": {
         "type": "object",
@@ -29763,7 +30336,12 @@
             "AgentClusterInsight": "#/components/schemas/AgentClusterInsightResult"
           }
         },
-        "description": "The result of the insights."
+        "description": "The result of the insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightSample": {
         "type": "object",
@@ -29803,7 +30381,12 @@
             "EvaluationResultSample": "#/components/schemas/EvaluationResultSample"
           }
         },
-        "description": "A sample from the analysis."
+        "description": "A sample from the analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightScheduleTask": {
         "type": "object",
@@ -29832,7 +30415,12 @@
             "$ref": "#/components/schemas/ScheduleTask"
           }
         ],
-        "description": "Insight task for the schedule."
+        "description": "Insight task for the schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "InsightSummary": {
         "type": "object",
@@ -29872,7 +30460,12 @@
             "description": "Token usage while performing clustering analysis"
           }
         },
-        "description": "Summary of the error cluster analysis."
+        "description": "Summary of the error cluster analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightType": {
         "anyOf": [
@@ -29888,7 +30481,12 @@
             ]
           }
         ],
-        "description": "The request of the insights."
+        "description": "The request of the insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InsightsMetadata": {
         "type": "object",
@@ -29907,7 +30505,12 @@
             "description": "The timestamp when the insights were completed."
           }
         },
-        "description": "Metadata about the insights."
+        "description": "Metadata about the insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "InvocationsProtocolConfiguration": {
         "type": "object",
@@ -30156,7 +30759,12 @@
             "description": "Dropout rate used during training. Informational — not used at serving time."
           }
         },
-        "description": "Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time."
+        "description": "Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "MCPToolboxTool": {
         "type": "object",
@@ -30256,14 +30864,6 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
           }
         },
         "allOf": [
@@ -31240,7 +31840,12 @@
             "description": "Blob URI of the model asset to fetch credentials for."
           }
         },
-        "description": "Request to fetch credentials for a model asset."
+        "description": "Request to fetch credentials for a model asset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "ModelDeployment": {
         "type": "object",
@@ -31327,7 +31932,12 @@
             "description": "The type of pending upload. Only TemporaryBlobReference is supported for models."
           }
         },
-        "description": "Represents a request for a pending upload of a model version."
+        "description": "Represents a request for a pending upload of a model version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "ModelPendingUploadResponse": {
         "type": "object",
@@ -31361,7 +31971,12 @@
             "description": "The type of pending upload. Only TemporaryBlobReference is supported for models."
           }
         },
-        "description": "Represents the response for a model pending upload request."
+        "description": "Represents the response for a model pending upload request.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "ModelSamplingParams": {
         "type": "object",
@@ -31408,7 +32023,12 @@
             "description": "The job ID that produced this model"
           }
         },
-        "description": "Source information for the model"
+        "description": "Source information for the model",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "ModelVersion": {
         "type": "object",
@@ -31495,7 +32115,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Model Version Definition"
+        "description": "Model Version Definition",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "MonthlyRecurrenceSchedule": {
         "type": "object",
@@ -31525,7 +32150,12 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Monthly recurrence schedule."
+        "description": "Monthly recurrence schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -31611,7 +32241,12 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "One-time trigger."
+        "description": "One-time trigger.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "OpenAI.Annotation": {
         "type": "object",
@@ -55462,14 +56097,6 @@
               "openapi"
             ]
           },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
           "openapi": {
             "allOf": [
               {
@@ -55501,7 +56128,12 @@
             "description": "Pinned agent version. Defaults to latest if omitted."
           }
         },
-        "description": "Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config."
+        "description": "Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationCandidate": {
         "type": "object",
@@ -55551,7 +56183,12 @@
             "description": "Promotion metadata. Null if the candidate has not been promoted."
           }
         },
-        "description": "Aggregated evaluation result for a single candidate agent configuration across all tasks."
+        "description": "Aggregated evaluation result for a single candidate agent configuration across all tasks.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationDatasetCriterion": {
         "type": "object",
@@ -55569,7 +56206,12 @@
             "description": "Criterion instruction / description."
           }
         },
-        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring."
+        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationDatasetInput": {
         "type": "object",
@@ -55593,7 +56235,12 @@
             "reference": "#/components/schemas/OptimizationReferenceDatasetInput"
           }
         },
-        "description": "Base discriminated model for dataset input. Either inline items or a registered reference."
+        "description": "Base discriminated model for dataset input. Either inline items or a registered reference.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationDatasetInputType": {
         "anyOf": [
@@ -55608,7 +56255,12 @@
             ]
           }
         ],
-        "description": "Discriminator values for the dataset input union."
+        "description": "Discriminator values for the dataset input union.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationDatasetItem": {
         "type": "object",
@@ -55636,7 +56288,12 @@
             "description": "Per-item evaluation criteria."
           }
         },
-        "description": "A single item in an inline dataset."
+        "description": "A single item in an inline dataset.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationEvaluatorRef": {
         "type": "object",
@@ -55653,7 +56310,12 @@
             "description": "Evaluator version. If not specified, the latest version is used."
           }
         },
-        "description": "Reference to a named evaluator, optionally pinned to a version."
+        "description": "Reference to a named evaluator, optionally pinned to a version.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationInlineDatasetInput": {
         "type": "object",
@@ -55682,7 +56344,12 @@
             "$ref": "#/components/schemas/OptimizationDatasetInput"
           }
         ],
-        "description": "Inline dataset — items supplied directly in the request body."
+        "description": "Inline dataset — items supplied directly in the request body.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationJob": {
         "type": "object",
@@ -55769,7 +56436,12 @@
             "readOnly": true
           }
         },
-        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates."
+        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationJobInputs": {
         "type": "object",
@@ -55819,7 +56491,12 @@
             "description": "Tuning knobs and run-mode."
           }
         },
-        "description": "Caller-supplied inputs for an optimization job."
+        "description": "Caller-supplied inputs for an optimization job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationJobListItem": {
         "type": "object",
@@ -55890,7 +56567,12 @@
             "readOnly": true
           }
         },
-        "description": "Slim job representation returned by the LIST endpoint."
+        "description": "Slim job representation returned by the LIST endpoint.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationJobProgress": {
         "type": "object",
@@ -55916,7 +56598,12 @@
             "description": "Wall-clock time elapsed in seconds since the job began executing."
           }
         },
-        "description": "In-flight progress; only populated while status is queued or in_progress."
+        "description": "In-flight progress; only populated while status is queued or in_progress.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationJobResult": {
         "type": "object",
@@ -55937,7 +56624,12 @@
             "description": "All evaluated candidates including baseline."
           }
         },
-        "description": "Terminal-state result body. Populated when status is succeeded or failed."
+        "description": "Terminal-state result body. Populated when status is succeeded or failed.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationOptions": {
         "type": "object",
@@ -55971,7 +56663,12 @@
             "description": "Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring."
           }
         },
-        "description": "Tuning knobs and run-mode for an optimization job."
+        "description": "Tuning knobs and run-mode for an optimization job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OptimizationReferenceDatasetInput": {
         "type": "object",
@@ -56001,7 +56698,12 @@
             "$ref": "#/components/schemas/OptimizationDatasetInput"
           }
         ],
-        "description": "Reference to a registered Foundry dataset."
+        "description": "Reference to a registered Foundry dataset.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "OtlpTelemetryEndpoint": {
         "type": "object",
@@ -56496,7 +57198,12 @@
             "description": "Version of the Foundry agent this candidate was promoted to."
           }
         },
-        "description": "Promotion metadata recorded when a candidate is deployed to a Foundry agent."
+        "description": "Promotion metadata recorded when a candidate is deployed to a Foundry agent.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V2Preview"
+          ]
+        }
       },
       "PromptAgentDefinition": {
         "type": "object",
@@ -56639,7 +57346,12 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Prompt-based evaluator"
+        "description": "Prompt-based evaluator",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "PromptDataGenerationJobSource": {
         "type": "object",
@@ -56669,7 +57381,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Prompt source for data generation jobs — inline text provided by the user."
+        "description": "Prompt source for data generation jobs — inline text provided by the user.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "PromptEvaluationSuiteJobSource": {
         "type": "object",
@@ -56699,7 +57416,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user."
+        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "PromptEvaluatorGenerationJobSource": {
         "type": "object",
@@ -56729,7 +57451,12 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
+        "description": "Prompt source for evaluator generation jobs — inline text provided by the user.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "ProtocolConfiguration": {
         "type": "object",
@@ -56844,7 +57571,12 @@
             "Monthly": "#/components/schemas/MonthlyRecurrenceSchedule"
           }
         },
-        "description": "Recurrence schedule model."
+        "description": "Recurrence schedule model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "RecurrenceTrigger": {
         "type": "object",
@@ -56893,7 +57625,12 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Recurrence based trigger."
+        "description": "Recurrence based trigger.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "RecurrenceType": {
         "anyOf": [
@@ -56910,7 +57647,12 @@
             ]
           }
         ],
-        "description": "Recurrence type."
+        "description": "Recurrence type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "RedTeam": {
         "type": "object",
@@ -56984,7 +57726,12 @@
             "description": "Target configuration for the red-team run."
           }
         },
-        "description": "Red team details."
+        "description": "Red team details.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "RedTeamEvalRunDataSource": {
         "type": "object",
@@ -57123,7 +57870,12 @@
             "AzureOpenAIModel": "#/components/schemas/AzureOpenAIModelConfiguration"
           }
         },
-        "description": "Abstract class for target configuration."
+        "description": "Abstract class for target configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "RedTeamTaxonomyItemGenerationParams": {
         "type": "object",
@@ -57291,7 +58043,12 @@
             ]
           }
         ],
-        "description": "Risk category for the attack objective."
+        "description": "Risk category for the attack objective.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "Routine": {
         "type": "object",
@@ -57771,7 +58528,12 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "SASCredentials": {
         "type": "object",
@@ -57812,7 +58574,12 @@
             "type": "string"
           }
         ],
-        "description": "The type of sample used in the analysis."
+        "description": "The type of sample used in the analysis.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "SasCredential": {
         "type": "object",
@@ -57912,7 +58679,12 @@
             "readOnly": true
           }
         },
-        "description": "Schedule model."
+        "description": "Schedule model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "ScheduleProvisioningStatus": {
         "anyOf": [
@@ -57930,7 +58702,12 @@
             ]
           }
         ],
-        "description": "Schedule provisioning status."
+        "description": "Schedule provisioning status.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "ScheduleRoutineTrigger": {
         "type": "object",
@@ -58009,7 +58786,12 @@
             "readOnly": true
           }
         },
-        "description": "Schedule run model."
+        "description": "Schedule run model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "ScheduleTask": {
         "type": "object",
@@ -58040,7 +58822,12 @@
             "Insight": "#/components/schemas/InsightScheduleTask"
           }
         },
-        "description": "Schedule task model."
+        "description": "Schedule task model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "ScheduleTaskType": {
         "anyOf": [
@@ -58055,7 +58842,12 @@
             ]
           }
         ],
-        "description": "Type of the task."
+        "description": "Type of the task.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "SessionDirectoryEntry": {
         "type": "object",
@@ -58333,7 +59125,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with SimpleQnA type."
+        "description": "The options for a data generation job with SimpleQnA type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SimpleQnAFineTuningQuestionType": {
         "anyOf": [
@@ -58348,7 +59145,12 @@
             ]
           }
         ],
-        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "Skill": {
         "type": "object",
@@ -58395,7 +59197,12 @@
             "description": "The latest version for the skill."
           }
         },
-        "description": "A skill resource."
+        "description": "A skill resource.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Skills=V1Preview"
+          ]
+        }
       },
       "SkillInlineContent": {
         "type": "object",
@@ -58437,7 +59244,12 @@
             "description": "List of pre-approved tools the skill may use. Experimental."
           }
         },
-        "description": "Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification."
+        "description": "Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Skills=V1Preview"
+          ]
+        }
       },
       "SkillName": {
         "type": "string",
@@ -58490,7 +59302,12 @@
             "description": "The Unix timestamp (seconds) when the skill version was created."
           }
         },
-        "description": "A specific version of a skill."
+        "description": "A specific version of a skill.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Skills=V1Preview"
+          ]
+        }
       },
       "Sku": {
         "type": "object",
@@ -58876,7 +59693,12 @@
             "description": "Additional properties for the taxonomy category."
           }
         },
-        "description": "Taxonomy category definition."
+        "description": "Taxonomy category definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "TaxonomySubCategory": {
         "type": "object",
@@ -58910,7 +59732,12 @@
             "description": "Additional properties for the taxonomy sub-category."
           }
         },
-        "description": "Taxonomy sub-category definition."
+        "description": "Taxonomy sub-category definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "TelemetryConfig": {
         "type": "object",
@@ -59222,7 +60049,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "ToolboxObject": {
         "type": "object",
@@ -59566,7 +60398,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with Traces type."
+        "description": "The options for a data generation job with Traces type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
@@ -59620,7 +60457,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
+        "description": "Traces source for data generation jobs — conversation traces from Application Insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "TracesEvaluationSuiteJobSource": {
         "type": "object",
@@ -59674,7 +60516,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights."
+        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "TracesEvaluatorGenerationJobSource": {
         "type": "object",
@@ -59728,7 +60575,12 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
+        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -59815,7 +60667,12 @@
             "type": "string"
           }
         ],
-        "description": "Treatment Effect Type."
+        "description": "Treatment Effect Type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Insights=V1Preview"
+          ]
+        }
       },
       "Trigger": {
         "type": "object",
@@ -59840,7 +60697,12 @@
             "OneTime": "#/components/schemas/OneTimeTrigger"
           }
         },
-        "description": "Base model for Trigger of the schedule."
+        "description": "Base model for Trigger of the schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "TriggerType": {
         "anyOf": [
@@ -59856,7 +60718,12 @@
             ]
           }
         ],
-        "description": "Type of the trigger."
+        "description": "Type of the trigger.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "UpdateAgentFromManifestRequest": {
         "type": "object",
@@ -59918,7 +60785,8 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "DraftAgents=V1Preview"
               ]
             }
           },
@@ -59930,6 +60798,13 @@
             ],
             "description": "The blueprint reference for the agent."
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview",
+            "DraftAgents=V1Preview"
+          ]
         }
       },
       "UpdateEvalParametersBody": {
@@ -59972,7 +60847,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "Request body for updating a model version. Only description and tags can be modified."
+        "description": "Request body for updating a model version. Only description and tags can be modified.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "UpdateToolboxRequest": {
         "type": "object",
@@ -60221,14 +61101,6 @@
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
           },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
           "custom_search_configuration": {
             "allOf": [
               {
@@ -60272,7 +61144,12 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Weekly recurrence schedule."
+        "description": "Weekly recurrence schedule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Schedules=V1Preview"
+          ]
+        }
       },
       "WorkIQPreviewTool": {
         "type": "object",
