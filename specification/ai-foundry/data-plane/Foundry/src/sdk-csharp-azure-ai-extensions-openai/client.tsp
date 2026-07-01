@@ -37,6 +37,14 @@ namespace Azure.AI.Projects {
   @@scope(Conversations.getConversationItem, "!csharp");
   @@scope(Conversations.deleteConversationItem, "!csharp");
 
+  // --------------------------------------------------------------------------------
+  // Fix the xref.
+  // Set it to default move all of OpenAI to "Internal" to make detecting new models 
+  // simpler.
+  // --------------------------------------------------------------------------------
+  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI.Internal", "csharp");
+
+
   // The ConversationResoruce is not yet emitted by the OpenAI SDK, so emitt it here for now. Once the OpenAI SDK emits it, this will be removed.
   @@clientNamespace(OpenAI.ConversationResource, "Azure.AI.Extensions.OpenAI", "csharp");
   @@usage(OpenAI.ConversationResource, Usage.output);
@@ -61,12 +69,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
 
-  // --------------------------------------------------------------------------------
-  // Fix the xref.
-  // Set it to default move all of OpenAI to "Internal" to make detecting new models 
-  // simpler.
-  // --------------------------------------------------------------------------------
-  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI.Internal", "csharp");
+  
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
   @@clientName(CreatedBy, "AgentResponseItemSource");
@@ -83,15 +86,20 @@ namespace Azure.AI.Projects {
   // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
   @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
   @@alternateType(OpenAI.OutputItemType, {  identity: "OpenAI.Responses.ResponseItemKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
-  @@alternateType(OpenAI.Tool, {  identity: "OpenAI.Responses.ResponseTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  
   @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
+  @@alternateType(OpenAI.Tool, {  identity: "OpenAI.Responses.ResponseTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
   @@alternateType(OpenAI.ToolType, {  identity: "OpenAI.Responses.ResponseToolKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.ComputerTool, {  identity: "OpenAI.Responses.ComputerTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.WebSearchTool, {  identity: "OpenAI.Responses.WebSearchTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.FunctionTool, {  identity: "OpenAI.Responses.FunctionTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.AnnotationType, {  identity: "OpenAI.Responses.ResponseMessageAnnotationKind",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   @@alternateType(OpenAI.ApplyPatchCallOutputStatus, {  identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ImageGenTool, { identity: "OpenAI.Responses.ImageGenerationTool" }, "csharp");
 
+  @@alternateType(OpenAI.CodeInterpreterOutputImage, {  identity: "OpenAI.Responses.CodeInterpreterCallImageOutput",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.CodeInterpreterOutputLogs, {  identity: "OpenAI.Responses.CodeInterpreterCallLogsOutput",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   // --------------------------------------------------------------------------------
   // Export OpenAI types from the OpenAI package instead of re-emitting them.
   // Each target verified public in OpenAI 2.11.0. Input/output TypeSpec twins
@@ -137,6 +145,18 @@ namespace Azure.AI.Projects {
 
   @@alternateType(OpenAI.Response, {  identity: "OpenAI.Responses.ResponseResult",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
   
+  @@alternateType(OpenAI.DetailEnum, {  identity: "OpenAI.Responses.ResponseImageDetailLevel",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ImageGenActionEnum, {  identity: "OpenAI.Responses.ImageGenerationToolAction",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.InputFidelity, {  identity: "OpenAI.Responses.ImageGenerationToolInputFidelity",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.TopLogProb, {  identity: "OpenAI.Responses.ResponseTokenTopLogProbabilityDetails",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.LogProb, {  identity: "OpenAI.Responses.ResponseTokenLogProbabilityDetails",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+  @@alternateType(OpenAI.Reasoning, {  identity: "OpenAI.Responses.ResponseReasoningOptions",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ResponseError, {  identity: "OpenAI.Responses.ResponseError",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ImageGenTool, {  identity: "OpenAI.Responses.ImageGenerationTool",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+  @@alternateType(OpenAI.ApproximateLocation, {  identity: "OpenAI.Responses.WebSearchToolApproximateLocation",  package: "OpenAI",  minVersion: "2.11.0"}, "csharp");
+
+
   // Now for some types, our TypeSpec is ahead of the OpenAI SDK, so we need to emit them here instead of mapping to the OpenAI SDK. These are all types that are not yet in the OpenAI SDK as of 2.11.0.
   @@clientNamespace(OpenAI.ContainerSkill, "Azure.AI.Extensions.OpenAI", "csharp");
   @@clientNamespace(OpenAI.ContainerSkillType, "Azure.AI.Extensions.OpenAI", "csharp");
@@ -146,8 +166,24 @@ namespace Azure.AI.Projects {
 
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(OpenAI.InputTextContent, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.InputTextContentParam, { identity: "System.Object" }, "csharp");
   @@alternateType(OpenAI.InputImageContent, { identity: "System.Object" }, "csharp");
-
+  @@alternateType(OpenAI.ComparisonFilter, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.CompoundFilter, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.RankingOptions, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.InputImageContentParamAutoParam, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.InputFileContent, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.MCPTool, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.WebSearchPreviewTool, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.CodeInterpreterTool, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.MCPListToolsTool, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.WebSearchActionSearch, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.WebSearchActionOpenPage, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.WebSearchActionFind, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.ToolChoiceOptions, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.VectorStoreFileAttributes, { identity: "System.Object" }, "csharp");
+  @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, { identity: "System.Object" }, "csharp");
+  
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
   // LocalShellToolCallOutputStatus - named union to replace inline union
@@ -459,11 +495,11 @@ namespace Azure.AI.Projects {
   @@access(AzureFunctionToolCallOutput, Access.public);
   @@usage(AzureFunctionToolCallOutput, Usage.input);
 
-  @@access(A2AToolCall, Access.public);
-  @@usage(A2AToolCall, Usage.input);
+  @@access(Azure.AI.Projects.A2AToolCall, Access.public);
+  @@usage(Azure.AI.Projects.A2AToolCall, Usage.input);
 
-  @@access(A2AToolCallOutput, Access.public);
-  @@usage(A2AToolCallOutput, Usage.input);
+  @@access(Azure.AI.Projects.A2AToolCallOutput, Access.public);
+  @@usage(Azure.AI.Projects.A2AToolCallOutput, Usage.input);
 
   @@access(MemorySearchToolCall, Access.public);
   @@usage(MemorySearchToolCall, Usage.input);
